@@ -1,43 +1,70 @@
 package com.graduateguy.myapplication.repository
 
 import android.util.Log
+import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.graduateguy.myapplication.network.Results
-import com.graduateguy.myapplication.network.api.ApiClient
-import com.graduateguy.myapplication.network.model.CovidSummary
+import com.graduateguy.myapplication.network.api.Covid19Api
+import com.graduateguy.myapplication.room.CovidDatabase
+import com.graduateguy.myapplication.room.entity.GlobalSummary
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
+import java.lang.Exception
+import kotlin.coroutines.CoroutineContext
 
-interface ICovidRepository<T>{
+interface ICovidRepository {
 
-    fun getSummaryData():CovidSummary
-
+    fun getSummaryData():LiveData<GlobalSummary>
+    fun loadGlobalSummary()
 }
-class CovidRepositoryImpl<T> : ICovidRepository<T> {
+
+class CovidRepositoryImpl(
+    private val network: Covid19Api,
+    private val db: CovidDatabase,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
+) : ICovidRepository, CoroutineScope {
 
     init {
-        getCovidSummaryData()
+        loadGlobalSummary()
     }
 
-    private fun getCovidSummaryData() {
-        ApiClient.getCovidSummaryData { result->
-            when(result){
-                is Results.Failure-> {
-                    Log.d(TAG, " response is ${result.error}")
+    @WorkerThread
+    override fun loadGlobalSummary() {
+        launch {
+            try {
+                val response = network.getCovidSummary().execute()
+                if (response.isSuccessful) {
+                    Log.d(TAG, "Response is successfull")
+                    response.body()?.apply {
+                        this.global?.let {
+                            db.globalSummaryDao.delete()
+                            db.globalSummaryDao.insert(it)
+                        }
+                        this.countries.forEach {
+                            db.countrydao.update(it)
+                        }
+                    }
+                } else {
+                    Log.d(TAG, "Response has failed")
                 }
-                is Results.Success->{
-                    val response = result.response.body()
-                    Log.d(TAG, " response is $response")
-                }
+            } catch (ex: Exception) {
+                Log.d(TAG, "Exception occured $ex")
             }
         }
     }
 
-    fun getSummaryData(): CovidSummary {
-        return CovidSummary()
+    override fun getSummaryData():LiveData<GlobalSummary> {
+        return db.globalSummaryDao.getSummary()
     }
 
+    override val coroutineContext: CoroutineContext
+        get() = SupervisorJob() + dispatcher
 
-    companion object{
+    companion object {
         private const val TAG = "Covid19Repository"
     }
 }
+
+
