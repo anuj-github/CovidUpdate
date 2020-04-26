@@ -1,15 +1,31 @@
 package com.graduateguy.myapplication.viewModel
 
-import androidx.lifecycle.ViewModel
-import com.graduateguy.myapplication.network.model.CovidSummary
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.graduateguy.myapplication.network.api.ApiClient
 import com.graduateguy.myapplication.repository.CovidRepositoryImpl
 import com.graduateguy.myapplication.repository.ICovidRepository
+import com.graduateguy.myapplication.room.CovidDatabase
+import com.graduateguy.myapplication.room.entity.GlobalSummary
 
-class LaunchViewModel:ViewModel() {
+class LaunchViewModel( context: Application):AndroidViewModel(context) {
 
-    var repositoryImpl: ICovidRepository<CovidSummary> = CovidRepositoryImpl<CovidSummary>()
+    private var summaryData = MutableLiveData<GlobalSummary>()
+    private var summaryLiveData: LiveData<GlobalSummary> = summaryData
 
-    fun refreshData() {
-        // repo.getLiveData().o
+    private var repositoryImpl: ICovidRepository = CovidRepositoryImpl(
+        ApiClient().getCovid19Api(), CovidDatabase.getCovidDatabase(context)
+    )
+
+    init {
+        // refreshData()
     }
+
+    private fun refreshData() {
+        repositoryImpl.loadGlobalSummary()
+    }
+
+    fun getSummaryLiveData():LiveData<GlobalSummary> = repositoryImpl.getSummaryData()
 }

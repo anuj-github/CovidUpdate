@@ -1,7 +1,14 @@
 package com.graduateguy.myapplication.network.model
 
+import com.google.gson.annotations.SerializedName
+import com.graduateguy.myapplication.room.entity.CountryInfo
+import com.graduateguy.myapplication.room.entity.GlobalSummary
+
 data class CovidSummary(
-    val countries: List<Country> = listOf(),
+    @SerializedName("Countries")
+    val countries: List<CountryInfo> = listOf(),
+    @SerializedName("Date")
     val date: String = "",
-    val global: Global?= null
+    @SerializedName("Global")
+    val global: GlobalSummary
 )
