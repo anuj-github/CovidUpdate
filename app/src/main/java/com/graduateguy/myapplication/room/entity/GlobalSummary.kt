@@ -2,22 +2,28 @@ package com.graduateguy.myapplication.room.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 @Entity
 data class GlobalSummary(
     @PrimaryKey(autoGenerate = true)
     val id :Int,
-    @SerializedName("NewConfirmed")
+
+    @field:Json(name = "NewConfirmed")
     val newConfirmed: Int,
-    @SerializedName("NewDeaths")
+
+    @field:Json(name = "NewDeaths")
     val newDeaths: Int,
-    @SerializedName("NewRecovered")
+
+    @field:Json(name = "NewRecovered")
     val newRecovered: Int,
-    @SerializedName("TotalConfirmed")
+
+    @field:Json(name = "TotalConfirmed")
     val totalConfirmed: Int,
-    @SerializedName("TotalDeaths")
+
+    @field:Json(name = "TotalDeaths")
     val totalDeaths: Int,
-    @SerializedName("TotalRecovered")
+
+    @field:Json(name = "TotalRecovered")
     val totalRecovered: Int
 )

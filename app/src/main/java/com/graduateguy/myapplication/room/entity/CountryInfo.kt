@@ -2,30 +2,39 @@ package com.graduateguy.myapplication.room.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 @Entity
 data class CountryInfo(
 
     @PrimaryKey
-    @SerializedName("Country")
+    @field:Json(name = "Country")
     val country: String,
-    @SerializedName("CountryCode")
+
+    @field:Json(name = "CountryCode")
     val countryCode: String,
-    @SerializedName("Date")
+
+    @field:Json(name = "Date")
     val date: String,
-    @SerializedName("NewConfirmed")
+
+    @field:Json(name = "NewConfirmed")
     val newConfirmed: Int,
-    @SerializedName("NewDeaths")
+
+    @field:Json(name = "NewDeaths")
     val newDeaths: Int,
-    @SerializedName("NewRecovered")
+
+    @field:Json(name = "NewRecovered")
     val newRecovered: Int,
-    @SerializedName("Slug")
+
+    @field:Json(name = "Slug")
     val slug: String,
-    @SerializedName("TotalConfirmed")
+
+    @field:Json(name = "TotalConfirmed")
     val totalConfirmed: Int,
-    @SerializedName("TotalDeaths")
+
+    @field:Json(name = "TotalDeaths")
     val totalDeaths: Int,
-    @SerializedName("TotalRecovered")
+
+    @field:Json(name = "TotalRecovered")
     val totalRecovered: Int
 )
