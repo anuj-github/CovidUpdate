@@ -1,7 +1,7 @@
-package com.graduateguy.myapplication.network.model
+package com.graduateguy.covid.network.model
 
-import com.graduateguy.myapplication.room.entity.CountryInfo
-import com.graduateguy.myapplication.room.entity.GlobalSummary
+import com.graduateguy.covid.room.entity.CountryInfo
+import com.graduateguy.covid.room.entity.GlobalSummary
 import com.squareup.moshi.Json
 
 data class CovidSummary(

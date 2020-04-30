@@ -1,4 +1,4 @@
-package com.graduateguy.myapplication.room.dao
+package com.graduateguy.covid.room.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -6,7 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.graduateguy.myapplication.room.entity.CountryInfo
+import com.graduateguy.covid.room.entity.CountryInfo
 import kotlinx.coroutines.flow.Flow
 
 @Dao

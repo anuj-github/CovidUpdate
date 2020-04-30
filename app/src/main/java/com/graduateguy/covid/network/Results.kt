@@ -1,4 +1,4 @@
-package com.graduateguy.myapplication.network
+package com.graduateguy.covid.network
 
 import retrofit2.Call
 import retrofit2.Response

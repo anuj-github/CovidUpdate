@@ -1,13 +1,13 @@
-package com.graduateguy.myapplication.room
+package com.graduateguy.covid.room
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.graduateguy.myapplication.room.dao.CountryDao
-import com.graduateguy.myapplication.room.dao.GlobalSummaryDao
-import com.graduateguy.myapplication.room.entity.CountryInfo
-import com.graduateguy.myapplication.room.entity.GlobalSummary
+import com.graduateguy.covid.room.dao.CountryDao
+import com.graduateguy.covid.room.dao.GlobalSummaryDao
+import com.graduateguy.covid.room.entity.CountryInfo
+import com.graduateguy.covid.room.entity.GlobalSummary
 
 @Database(
     version = 1,

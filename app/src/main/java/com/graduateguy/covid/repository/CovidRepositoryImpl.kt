@@ -1,11 +1,11 @@
-package com.graduateguy.myapplication.repository
+package com.graduateguy.covid.repository
 
 import android.util.Log
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
-import com.graduateguy.myapplication.network.api.Covid19Api
-import com.graduateguy.myapplication.room.CovidDatabase
-import com.graduateguy.myapplication.room.entity.GlobalSummary
+import com.graduateguy.covid.network.api.Covid19Api
+import com.graduateguy.covid.room.CovidDatabase
+import com.graduateguy.covid.room.entity.GlobalSummary
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
