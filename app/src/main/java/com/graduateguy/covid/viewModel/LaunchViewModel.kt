@@ -28,4 +28,7 @@ class LaunchViewModel(context: Application):AndroidViewModel(context) {
     }
 
     fun getSummaryLiveData():LiveData<GlobalSummary> = repositoryImpl.getSummaryData()
+    fun getString(total: Int, new:Int, string: String): String {
+        return String.format(string, total, new)
+    }
 }

@@ -38,11 +38,11 @@ class CovidRepositoryImpl(
                 if (response.isSuccessful) {
                     Log.d(TAG, "Response is successfull")
                     response.body()?.apply {
-                        this.global?.let {
+                        global.let {
                             db.globalSummaryDao.delete()
                             db.globalSummaryDao.insert(it)
                         }
-                        this.countries.forEach {
+                        countries.forEach {
                             db.countrydao.update(it)
                         }
                     }
