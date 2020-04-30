@@ -1,4 +1,4 @@
-package com.graduateguy.myapplication
+package com.graduateguy.covid
 
 import org.junit.Test
 

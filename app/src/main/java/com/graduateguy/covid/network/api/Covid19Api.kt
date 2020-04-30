@@ -1,6 +1,6 @@
-package com.graduateguy.myapplication.network.api
+package com.graduateguy.covid.network.api
 
-import com.graduateguy.myapplication.network.model.CovidSummary
+import com.graduateguy.covid.network.model.CovidSummary
 import retrofit2.Call
 import retrofit2.http.GET
 

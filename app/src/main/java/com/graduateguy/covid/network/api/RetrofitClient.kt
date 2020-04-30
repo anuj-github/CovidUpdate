@@ -1,8 +1,8 @@
-package com.graduateguy.myapplication.network.api
+package com.graduateguy.covid.network.api
 
 import android.util.Log
-import com.graduateguy.myapplication.network.Results
-import com.graduateguy.myapplication.network.model.CovidSummary
+import com.graduateguy.covid.network.Results
+import com.graduateguy.covid.network.model.CovidSummary
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

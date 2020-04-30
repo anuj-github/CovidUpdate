@@ -1,16 +1,16 @@
-package com.graduateguy.myapplication.viewModel
+package com.graduateguy.covid.viewModel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.graduateguy.myapplication.network.api.RetrofitClient
-import com.graduateguy.myapplication.repository.CovidRepositoryImpl
-import com.graduateguy.myapplication.repository.ICovidRepository
-import com.graduateguy.myapplication.room.CovidDatabase
-import com.graduateguy.myapplication.room.entity.GlobalSummary
+import com.graduateguy.covid.network.api.RetrofitClient
+import com.graduateguy.covid.repository.CovidRepositoryImpl
+import com.graduateguy.covid.repository.ICovidRepository
+import com.graduateguy.covid.room.CovidDatabase
+import com.graduateguy.covid.room.entity.GlobalSummary
 
-class LaunchViewModel( context: Application):AndroidViewModel(context) {
+class LaunchViewModel(context: Application):AndroidViewModel(context) {
 
     private var summaryData = MutableLiveData<GlobalSummary>()
     private var summaryLiveData: LiveData<GlobalSummary> = summaryData
