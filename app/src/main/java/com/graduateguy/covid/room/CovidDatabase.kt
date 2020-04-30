@@ -10,7 +10,7 @@ import com.graduateguy.covid.room.entity.CountryInfo
 import com.graduateguy.covid.room.entity.GlobalSummary
 
 @Database(
-    version = 1,
+    version = 1, exportSchema = false,
     entities = [
         GlobalSummary::class,
         CountryInfo::class

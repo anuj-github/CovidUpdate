@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="4dp"
+    android:background="@android:color/holo_blue_dark"
     android:paddingTop="24dp"
     tools:context=".ui.SummaryActivity">
 
@@ -12,38 +13,95 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="World Covid 19"
+        android:text="@string/covid_summary"
+        android:textColor="@android:color/white"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:textSize="14sp"
+        android:textSize="18sp"
         app:textAllCaps="true"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/count"
+        android:gravity="center_horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/count"
-        android:layout_width="wrap_content"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/InfoTextStyle"
-        android:layout_marginStart="16dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="8dp"
+        app:cardBackgroundColor="@android:color/white"
         app:layout_constraintTop_toBottomOf="@id/title"
-        tools:text="Total Count"/>
-
-    <TextView
-        android:id="@+id/totalCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/InfoTextStyle"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/count"
-        app:layout_constraintTop_toBottomOf="@id/title"
-        tools:text="240000"/>
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp">
+
+        <TextView
+            android:id="@+id/countText"
+            style="@style/InfoTextStyle"
+            android:text="@string/total_count"
+            android:textColor="@android:color/holo_red_dark"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/deathText"/>
+
+        <TextView
+            android:id="@+id/totalCount"
+            style="@style/CountTextStyle"
+            android:textColor="@android:color/holo_red_dark"
+            app:layout_constraintLeft_toRightOf="@id/countText"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/totalDeath"
+            tools:text="240000"/>
+
+            <TextView
+                android:id="@+id/deathText"
+                style="@style/InfoTextStyle"
+                android:text="@string/total_death"
+                android:textColor="@android:color/black"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/countText"
+                app:layout_constraintBottom_toTopOf="@id/recoveredText" />
+
+            <TextView
+                android:id="@+id/totalDeath"
+                style="@style/CountTextStyle"
+                android:textColor="@android:color/black"
+                app:layout_constraintStart_toStartOf="@id/totalCount"
+                app:layout_constraintLeft_toRightOf="@id/deathText"
+                app:layout_constraintTop_toBottomOf="@id/totalCount"
+                app:layout_constraintBottom_toTopOf="@id/totalRecovered"
+                tools:text="240000"/>
+
+            <TextView
+                android:id="@+id/recoveredText"
+                style="@style/InfoTextStyle"
+                android:text="@string/total_recovered"
+                android:layout_marginBottom="8dp"
+                android:textColor="@android:color/holo_blue_light"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/deathText"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <TextView
+                android:id="@+id/totalRecovered"
+                style="@style/CountTextStyle"
+                android:layout_marginBottom="8dp"
+                android:textColor="@android:color/holo_blue_light"
+                app:layout_constraintStart_toStartOf="@id/totalCount"
+                app:layout_constraintLeft_toRightOf="@id/recoveredText"
+                app:layout_constraintTop_toBottomOf="@id/totalDeath"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:text="240000"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
