@@ -10,6 +10,7 @@ import com.graduateguy.covid.network.api.RetrofitClient
 import com.graduateguy.covid.repository.CovidRepositoryImpl
 import com.graduateguy.covid.repository.ICovidRepository
 import com.graduateguy.covid.room.CovidDatabase
+import com.graduateguy.covid.room.entity.CountryInfo
 import com.graduateguy.covid.room.entity.GlobalSummary
 
 class LaunchViewModel(context: Application):AndroidViewModel(context) {
@@ -28,7 +29,9 @@ class LaunchViewModel(context: Application):AndroidViewModel(context) {
             .asLiveData(viewModelScope.coroutineContext)
     }
 
-    fun getFormattedString(total: Int, new:Int, string: String): String {
-        return String.format(string, total, new)
+    fun getCountryLiveData(): LiveData<List<CountryInfo>> {
+        return repositoryImpl
+            .getMostAffectedCountry()
+            .asLiveData(viewModelScope.coroutineContext)
     }
 }

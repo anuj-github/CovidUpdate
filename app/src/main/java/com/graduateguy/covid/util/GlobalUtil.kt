@@ -14,4 +14,8 @@ object GlobalUtil {
         arr[2]= ColorTemplate.rgb("#ffff4444")
         return arr;
     }
+
+    fun getFormattedString(total: Int, new:Int, string: String): String {
+        return String.format(string, total, new)
+    }
 }
