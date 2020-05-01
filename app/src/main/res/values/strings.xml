@@ -6,4 +6,7 @@
     <string name="covid_summary">Covid Summary</string>
     <string name="count">%s ( +%s)</string>
     <string name="refresh">Refresh</string>
+    <string name="active">Active</string>
+    <string name="death">Death</string>
+    <string name="recovered">Recovered</string>
 </resources>

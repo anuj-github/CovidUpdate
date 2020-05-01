@@ -1,5 +1,6 @@
 package com.graduateguy.covid.ui
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -7,18 +8,28 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.github.mikephil.charting.charts.PieChart
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.data.PieEntry
 import com.graduateguy.covid.R
-import com.graduateguy.covid.databinding.SummaryLayoutBinding
+import com.graduateguy.covid.databinding.SummaryGraphBinding
+import com.graduateguy.covid.room.entity.GlobalSummary
+import com.graduateguy.covid.util.GlobalUtil
 import com.graduateguy.covid.viewModel.LaunchViewModel
 
 class SummaryActivity : AppCompatActivity() {
 
-    private lateinit var binding: SummaryLayoutBinding
+    private lateinit var binding: SummaryGraphBinding
     private lateinit var viewModel: LaunchViewModel
+    private lateinit var pieChart: PieChart
+    private lateinit var pieData: PieData
+    private lateinit var pieDataSet: PieDataSet
+    private var pieEntries = mutableListOf<PieEntry>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = SummaryLayoutBinding.inflate(layoutInflater)
+        binding = SummaryGraphBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModel = ViewModelProvider(this).get(LaunchViewModel::class.java)
 
@@ -26,25 +37,45 @@ class SummaryActivity : AppCompatActivity() {
             Log.d(TAG, "on data change")
             it?.let {summary->
                 binding.apply {
-                    totalCount.text =
-                        viewModel.getFormattedString(
-                            summary.totalConfirmed,
-                            summary.newConfirmed,
-                            getString(R.string.count)
-                        )
-                    totalDeath.text = viewModel.getFormattedString(
-                        summary.totalDeaths, summary.newDeaths,
-                        getString(R.string.count)
-                    )
-                    totalRecovered.text = viewModel.getFormattedString(
-                        summary.totalRecovered, summary.newRecovered,
-                        getString(R.string.count)
-                    )
+                   updateChart(it)
                 }
 
 
             }
         })
+        pieChart = binding.pieChart
+    }
+
+
+    private fun updateEntries(summary: GlobalSummary) {
+        val death = summary.totalDeaths
+        val recovered = summary.totalRecovered
+        val active = summary.totalConfirmed - death - recovered
+        pieEntries = ArrayList()
+        pieEntries.add(PieEntry(active.toFloat(), 0))
+        pieEntries.add(PieEntry(recovered.toFloat(), 1))
+        pieEntries.add(PieEntry(death.toFloat(), 2))
+
+        pieEntries[0].label = getString(R.string.active)
+        pieEntries[1].label = getString(R.string.recovered)
+        pieEntries[2].label = getString(R.string.death)
+
+        pieDataSet = PieDataSet(pieEntries, "")
+        pieData = PieData(pieDataSet)
+        pieChart.data = pieData
+        val arr = GlobalUtil.getColor()
+        pieDataSet.setColors(arr[0], arr[1], arr[2])
+        pieDataSet.sliceSpace = 1f
+        pieDataSet.valueTextColor = Color.WHITE
+        pieDataSet.valueTextSize = 10f
+    }
+
+    private fun updateChart(summary: GlobalSummary){
+        val death = ((summary.totalDeaths*100)/summary.totalConfirmed)
+        val recovered = ((summary.totalRecovered*100)/summary.totalConfirmed)
+        binding.apply {
+           updateEntries(summary)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -62,6 +93,8 @@ class SummaryActivity : AppCompatActivity() {
     private fun refreshData(){
         viewModel.refreshData()
     }
+
+
 
     companion object{
         private const val TAG = "LauncherActivity"
