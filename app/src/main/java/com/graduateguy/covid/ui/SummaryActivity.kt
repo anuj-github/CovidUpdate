@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.github.mikephil.charting.charts.PieChart
+import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
@@ -35,7 +36,7 @@ class SummaryActivity : AppCompatActivity() {
 
         viewModel.getSummaryLiveData().observe(this, Observer {
             Log.d(TAG, "on data change")
-            it?.let {summary->
+            it?.let {
                 binding.apply {
                    updateChart(it)
                 }
@@ -44,6 +45,7 @@ class SummaryActivity : AppCompatActivity() {
             }
         })
         pieChart = binding.pieChart
+        pieChart.description = null
     }
 
 
