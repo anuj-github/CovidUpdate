@@ -2,6 +2,8 @@ package com.graduateguy.covid.ui
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -19,12 +21,10 @@ class SummaryActivity : AppCompatActivity() {
         binding = SummaryLayoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModel = ViewModelProvider(this).get(LaunchViewModel::class.java)
-        // viewModel.refreshData()
 
         viewModel.getSummaryLiveData().observe(this, Observer {
-            Log.d(TAG, "Anuj on data change")
+            Log.d(TAG, "on data change")
             it?.let {summary->
-                Log.d(TAG, "Anuj Summary is $summary")
                 binding.apply {
                     totalCount.text =
                         viewModel.getString(
@@ -45,6 +45,22 @@ class SummaryActivity : AppCompatActivity() {
 
             }
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.summary_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.refresh -> refreshData()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun refreshData(){
+        viewModel.refreshData()
     }
 
     companion object{

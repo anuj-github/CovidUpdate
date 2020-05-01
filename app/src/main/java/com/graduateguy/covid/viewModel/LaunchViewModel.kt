@@ -4,6 +4,8 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import com.graduateguy.covid.network.api.RetrofitClient
 import com.graduateguy.covid.repository.CovidRepositoryImpl
 import com.graduateguy.covid.repository.ICovidRepository
@@ -19,15 +21,16 @@ class LaunchViewModel(context: Application):AndroidViewModel(context) {
         RetrofitClient().getCovid19Api(), CovidDatabase.getCovidDatabase(context)
     )
 
-    init {
-        // refreshData()
-    }
-
-    private fun refreshData() {
+    public fun refreshData() {
         repositoryImpl.loadGlobalSummary()
     }
 
-    fun getSummaryLiveData():LiveData<GlobalSummary> = repositoryImpl.getSummaryData()
+    fun getSummaryLiveData(): LiveData<GlobalSummary> {
+        return repositoryImpl
+            .getSummaryData()
+            .asLiveData(viewModelScope.coroutineContext)
+    }
+
     fun getString(total: Int, new:Int, string: String): String {
         return String.format(string, total, new)
     }

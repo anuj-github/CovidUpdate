@@ -2,7 +2,6 @@ package com.graduateguy.covid.repository
 
 import android.util.Log
 import androidx.annotation.WorkerThread
-import androidx.lifecycle.LiveData
 import com.graduateguy.covid.network.api.Covid19Api
 import com.graduateguy.covid.room.CovidDatabase
 import com.graduateguy.covid.room.entity.GlobalSummary
@@ -10,13 +9,14 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import kotlin.coroutines.CoroutineContext
 
 interface ICovidRepository {
 
-    fun getSummaryData():LiveData<GlobalSummary>
+    fun getSummaryData():Flow<GlobalSummary>
     fun loadGlobalSummary()
 }
 
@@ -36,7 +36,7 @@ class CovidRepositoryImpl(
             try {
                 val response = network.getCovidSummary().execute()
                 if (response.isSuccessful) {
-                    Log.d(TAG, "Response is successfull")
+                    Log.d(TAG, "Response is successful")
                     response.body()?.apply {
                         global.let {
                             db.globalSummaryDao.delete()
@@ -55,9 +55,8 @@ class CovidRepositoryImpl(
         }
     }
 
-    override fun getSummaryData():LiveData<GlobalSummary> {
-        return db.globalSummaryDao.getSummary()
-    }
+    override fun getSummaryData(): Flow<GlobalSummary> = db.globalSummaryDao.getSummary()
+
 
     override val coroutineContext: CoroutineContext
         get() = SupervisorJob() + dispatcher
