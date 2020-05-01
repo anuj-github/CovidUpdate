@@ -42,14 +42,10 @@ class CovidRepositoryImpl(
                     response.body()?.apply {
                         global.let {
                             db.globalSummaryDao.delete()
-                            db.globalSummaryDao.insert(it)
-                        }
-                        for(i in 0 until 10){
-                            if(i>countries.size) break
-                            Log.d(TAG, "Anuj country data is ${countries[i]}")
+                            db.globalSummaryDao.insert(it.copy(date = this.date))
                         }
                         countries.forEach {
-                            db.countrydao.insert(it)
+                           db.countrydao.insert(it)
                         }
                     }
                 } else {

@@ -25,5 +25,8 @@ data class GlobalSummary(
     val totalDeaths: Int,
 
     @field:Json(name = "TotalRecovered")
-    val totalRecovered: Int
+    val totalRecovered: Int,
+
+    val date : String
+
 )
