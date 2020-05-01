@@ -31,6 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        app:cardCornerRadius="16dp"
         app:cardBackgroundColor="@android:color/white"
         app:layout_constraintTop_toBottomOf="@id/title"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +46,7 @@
             android:id="@+id/countText"
             style="@style/InfoTextStyle"
             android:text="@string/total_count"
-            android:textColor="@android:color/holo_red_dark"
+            android:textColor="@android:color/black"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/deathText"/>
@@ -53,7 +54,7 @@
         <TextView
             android:id="@+id/totalCount"
             style="@style/CountTextStyle"
-            android:textColor="@android:color/holo_red_dark"
+            android:textColor="@android:color/black"
             app:layout_constraintLeft_toRightOf="@id/countText"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/totalDeath"
@@ -63,7 +64,7 @@
                 android:id="@+id/deathText"
                 style="@style/InfoTextStyle"
                 android:text="@string/total_death"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/holo_red_dark"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/countText"
                 app:layout_constraintBottom_toTopOf="@id/recoveredText" />
@@ -71,7 +72,7 @@
             <TextView
                 android:id="@+id/totalDeath"
                 style="@style/CountTextStyle"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/holo_red_dark"
                 app:layout_constraintStart_toStartOf="@id/totalCount"
                 app:layout_constraintLeft_toRightOf="@id/deathText"
                 app:layout_constraintTop_toBottomOf="@id/totalCount"
@@ -83,7 +84,7 @@
                 style="@style/InfoTextStyle"
                 android:text="@string/total_recovered"
                 android:layout_marginBottom="8dp"
-                android:textColor="@android:color/holo_blue_light"
+                android:textColor="@android:color/holo_green_dark"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/deathText"
                 app:layout_constraintBottom_toBottomOf="parent" />
@@ -92,7 +93,7 @@
                 android:id="@+id/totalRecovered"
                 style="@style/CountTextStyle"
                 android:layout_marginBottom="8dp"
-                android:textColor="@android:color/holo_blue_light"
+                android:textColor="@android:color/holo_green_dark"
                 app:layout_constraintStart_toStartOf="@id/totalCount"
                 app:layout_constraintLeft_toRightOf="@id/recoveredText"
                 app:layout_constraintTop_toBottomOf="@id/totalDeath"

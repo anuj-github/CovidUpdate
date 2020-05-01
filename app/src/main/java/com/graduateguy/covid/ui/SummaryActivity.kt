@@ -27,16 +27,16 @@ class SummaryActivity : AppCompatActivity() {
             it?.let {summary->
                 binding.apply {
                     totalCount.text =
-                        viewModel.getString(
+                        viewModel.getFormattedString(
                             summary.totalConfirmed,
                             summary.newConfirmed,
                             getString(R.string.count)
                         )
-                    totalDeath.text = viewModel.getString(
+                    totalDeath.text = viewModel.getFormattedString(
                         summary.totalDeaths, summary.newDeaths,
                         getString(R.string.count)
                     )
-                    totalRecovered.text = viewModel.getString(
+                    totalRecovered.text = viewModel.getFormattedString(
                         summary.totalRecovered, summary.newRecovered,
                         getString(R.string.count)
                     )

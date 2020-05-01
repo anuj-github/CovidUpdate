@@ -14,14 +14,11 @@ import com.graduateguy.covid.room.entity.GlobalSummary
 
 class LaunchViewModel(context: Application):AndroidViewModel(context) {
 
-    private var summaryData = MutableLiveData<GlobalSummary>()
-    private var summaryLiveData: LiveData<GlobalSummary> = summaryData
-
     private var repositoryImpl: ICovidRepository = CovidRepositoryImpl(
         RetrofitClient().getCovid19Api(), CovidDatabase.getCovidDatabase(context)
     )
 
-    public fun refreshData() {
+    fun refreshData() {
         repositoryImpl.loadGlobalSummary()
     }
 
@@ -31,7 +28,7 @@ class LaunchViewModel(context: Application):AndroidViewModel(context) {
             .asLiveData(viewModelScope.coroutineContext)
     }
 
-    fun getString(total: Int, new:Int, string: String): String {
+    fun getFormattedString(total: Int, new:Int, string: String): String {
         return String.format(string, total, new)
     }
 }
