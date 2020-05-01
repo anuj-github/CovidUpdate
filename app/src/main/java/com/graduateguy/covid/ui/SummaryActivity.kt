@@ -5,15 +5,18 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View.GONE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.github.mikephil.charting.charts.PieChart
-import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.graduateguy.covid.R
+import com.graduateguy.covid.adapter.CountryListAdapter
 import com.graduateguy.covid.databinding.SummaryGraphBinding
 import com.graduateguy.covid.room.entity.GlobalSummary
 import com.graduateguy.covid.util.GlobalUtil
@@ -21,12 +24,14 @@ import com.graduateguy.covid.viewModel.LaunchViewModel
 
 class SummaryActivity : AppCompatActivity() {
 
-    private lateinit var binding: SummaryGraphBinding
-    private lateinit var viewModel: LaunchViewModel
-    private lateinit var pieChart: PieChart
-    private lateinit var pieData: PieData
-    private lateinit var pieDataSet: PieDataSet
+    private lateinit var binding : SummaryGraphBinding
+    private lateinit var viewModel : LaunchViewModel
+    private lateinit var pieChart : PieChart
+    private lateinit var pieData : PieData
+    private lateinit var pieDataSet : PieDataSet
     private var pieEntries = mutableListOf<PieEntry>()
+    private lateinit var recyclerView : RecyclerView
+    private lateinit var countryListAdapter : CountryListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,20 +39,48 @@ class SummaryActivity : AppCompatActivity() {
         setContentView(binding.root)
         viewModel = ViewModelProvider(this).get(LaunchViewModel::class.java)
 
+        pieChart = binding.pieChart
+        pieChart.description = null
+        initAdapter()
+        observeGlobalSummary()
+        observeCountryData()
+    }
+
+    private fun observeCountryData() {
+        Log.d(TAG, "Anuj observeCountryData")
+        viewModel.getCountryLiveData().observe(this, Observer {
+            Log.d(TAG, "Anuj data change $it")
+            if(it.isNullOrEmpty()){
+                binding.mostAffected.visibility = GONE
+            }
+            it.let {
+               countryListAdapter.setData(it)
+            }
+        })
+    }
+
+    private fun observeGlobalSummary() {
+        Log.d(TAG, "Anuj observeGlobalSummary")
         viewModel.getSummaryLiveData().observe(this, Observer {
-            Log.d(TAG, "on data change")
+            Log.d(TAG, "on observeGlobalSummary data change")
             it?.let {
                 binding.apply {
-                   updateChart(it)
+                    updateChart(it)
                 }
-
 
             }
         })
-        pieChart = binding.pieChart
-        pieChart.description = null
     }
 
+    private fun initAdapter() {
+        recyclerView = binding.recylerView
+        countryListAdapter = CountryListAdapter()
+        recyclerView.apply {
+            layoutManager = LinearLayoutManager(this@SummaryActivity)
+            adapter = countryListAdapter
+        }
+
+    }
 
     private fun updateEntries(summary: GlobalSummary) {
         val death = summary.totalDeaths

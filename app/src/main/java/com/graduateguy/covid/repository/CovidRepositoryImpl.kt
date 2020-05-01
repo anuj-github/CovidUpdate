@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.annotation.WorkerThread
 import com.graduateguy.covid.network.api.Covid19Api
 import com.graduateguy.covid.room.CovidDatabase
+import com.graduateguy.covid.room.entity.CountryInfo
 import com.graduateguy.covid.room.entity.GlobalSummary
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
@@ -17,6 +18,7 @@ import kotlin.coroutines.CoroutineContext
 interface ICovidRepository {
 
     fun getSummaryData():Flow<GlobalSummary>
+    fun getMostAffectedCountry():Flow<List<CountryInfo>>
     fun loadGlobalSummary()
 }
 
@@ -42,8 +44,12 @@ class CovidRepositoryImpl(
                             db.globalSummaryDao.delete()
                             db.globalSummaryDao.insert(it)
                         }
+                        for(i in 0 until 10){
+                            if(i>countries.size) break
+                            Log.d(TAG, "Anuj country data is ${countries[i]}")
+                        }
                         countries.forEach {
-                            db.countrydao.update(it)
+                            db.countrydao.insert(it)
                         }
                     }
                 } else {
@@ -56,7 +62,7 @@ class CovidRepositoryImpl(
     }
 
     override fun getSummaryData(): Flow<GlobalSummary> = db.globalSummaryDao.getSummary()
-
+    override fun getMostAffectedCountry(): Flow<List<CountryInfo>>  = db.countrydao.getSummaryMostAffected()
 
     override val coroutineContext: CoroutineContext
         get() = SupervisorJob() + dispatcher
