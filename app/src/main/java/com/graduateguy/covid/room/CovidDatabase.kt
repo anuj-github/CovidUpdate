@@ -23,7 +23,7 @@ abstract class CovidDatabase : RoomDatabase() {
     companion object{
 
         private var covidDatabse:CovidDatabase?=null
-        private val DB_NAME = "coviddb"
+        val DB_NAME = "coviddb"
         fun getCovidDatabase(context: Context): CovidDatabase {
             if (covidDatabse == null) {
                 covidDatabse = Room.databaseBuilder(
