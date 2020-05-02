@@ -21,5 +21,26 @@
     <style name="CountTextStyle" parent="InfoTextStyle">
         <item name="android:layout_marginStart">16dp</item>
     </style>
+    <style name="BottomBarText" parent="TextAppearance.MaterialComponents.Button">
+        <item name="android:letterSpacing">-0.02</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="BottomNavigationStyle" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:textAppearance">@style/BottomBarText</item>
+        <item name="android:layout_gravity">bottom</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="itemIconTint">@drawable/bottom_navigation_color</item>
+        <item name="itemTextColor">@drawable/bottom_navigation_color</item>
+    </style>
+
+    <style name="BottomNavigationTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@android:color/holo_blue_light</item>
+        <item name="colorPrimaryDark">@android:color/white</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="colorAccent">@android:color/holo_blue_light</item>
+        <item name="android:textColorSecondary">@android:color/darker_gray</item>
+        <item name="android:textColor">@android:color/darker_gray</item>
+    </style>
 
 </resources>

@@ -8,49 +8,24 @@
     android:background="@android:color/white"
     tools:context=".ui.SummaryGraphActivity">
 
-    <!-- Title above the chart -->
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/covid_summary"
-        android:textSize="18sp"
-        android:layout_marginTop="8dp"
-        android:textColor="@android:color/holo_green_light"
-        app:layout_constraintBottom_toTopOf="@+id/pieChart"
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="parent" />
 
-    <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/pieChart"
-        android:layout_width="364dp"
-        android:layout_height="364dp"
-        android:layout_marginTop="16dp"
-        android:foregroundGravity="center_horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title">
 
-    </com.github.mikephil.charting.charts.PieChart>
-
-    <TextView
-        android:id="@+id/mostAffected"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigationMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/most_affected"
-        android:layout_marginStart="16dp"
-        app:layout_constraintTop_toBottomOf="@id/pieChart"
+        style="@style/BottomNavigationStyle"
+        android:theme="@style/BottomNavigationTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_navigation"
         />
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recylerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintTop_toBottomOf="@id/mostAffected"
-       />
 </androidx.constraintlayout.widget.ConstraintLayout >

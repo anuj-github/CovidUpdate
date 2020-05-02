@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/summary_menu"
+        android:enabled="true"
+        android:title="@string/covid_summary" />
+    <item
+        android:id="@+id/country_menu"
+        android:enabled="true"
+        android:title="@string/country" />
+    <item
+        android:id="@+id/update_menu"
+        android:enabled="true"
+        android:title="@string/updates" />
+</menu>
