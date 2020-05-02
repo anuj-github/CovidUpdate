@@ -8,7 +8,6 @@ import android.view.MenuItem
 import android.view.View.GONE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.mikephil.charting.charts.PieChart
@@ -20,12 +19,13 @@ import com.graduateguy.covid.adapter.CountryListAdapter
 import com.graduateguy.covid.databinding.SummaryGraphBinding
 import com.graduateguy.covid.room.entity.GlobalSummary
 import com.graduateguy.covid.util.GlobalUtil
-import com.graduateguy.covid.viewModel.LaunchViewModel
+import com.graduateguy.covid.viewModel.SummaryViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SummaryActivity : AppCompatActivity() {
 
     private lateinit var binding : SummaryGraphBinding
-    private lateinit var viewModel : LaunchViewModel
+    private val summaryViewModel : SummaryViewModel by viewModel()
     private lateinit var pieChart : PieChart
     private lateinit var pieData : PieData
     private lateinit var pieDataSet : PieDataSet
@@ -37,7 +37,6 @@ class SummaryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = SummaryGraphBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        viewModel = ViewModelProvider(this).get(LaunchViewModel::class.java)
 
         pieChart = binding.pieChart
         pieChart.description = null
@@ -48,7 +47,7 @@ class SummaryActivity : AppCompatActivity() {
 
     private fun observeCountryData() {
         Log.d(TAG, "Anuj observeCountryData")
-        viewModel.getCountryLiveData().observe(this, Observer {
+        summaryViewModel.getCountryLiveData().observe(this, Observer {
             Log.d(TAG, "Anuj data change $it")
             if(it.isNullOrEmpty()){
                 binding.mostAffected.visibility = GONE
@@ -61,7 +60,7 @@ class SummaryActivity : AppCompatActivity() {
 
     private fun observeGlobalSummary() {
         Log.d(TAG, "Anuj observeGlobalSummary")
-        viewModel.getSummaryLiveData().observe(this, Observer {
+        summaryViewModel.getSummaryLiveData().observe(this, Observer {
             Log.d(TAG, "on observeGlobalSummary data change")
             it?.let {
                 binding.apply {
@@ -126,7 +125,7 @@ class SummaryActivity : AppCompatActivity() {
     }
 
     private fun refreshData(){
-        viewModel.refreshData()
+        summaryViewModel.refreshData()
     }
 
 
