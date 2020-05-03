@@ -3,10 +3,12 @@
     <item
         android:id="@+id/summary_menu"
         android:enabled="true"
+        android:icon="@drawable/ic_summary"
         android:title="@string/covid_summary" />
     <item
         android:id="@+id/country_menu"
         android:enabled="true"
+        android:icon="@drawable/world"
         android:title="@string/country" />
     <item
         android:id="@+id/update_menu"

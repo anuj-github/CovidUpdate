@@ -1,4 +1,4 @@
-package com.graduateguy.covid.ui
+package com.graduateguy.covid.ui.activity
 
 import android.os.Bundle
 import android.util.SparseArray
@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.graduateguy.covid.R
 import com.graduateguy.covid.databinding.SummaryGraphBinding
+import com.graduateguy.covid.ui.fragment.CountryInfoFragment
 import com.graduateguy.covid.ui.fragment.SummaryFragment
 import com.graduateguy.covid.viewModel.SummaryViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -42,8 +43,6 @@ class SummaryActivity : AppCompatActivity() {
 
             else -> return@OnNavigationItemSelectedListener false
         }
-
-
     }
 
     private fun openFragment(id: Int): Boolean {
@@ -63,8 +62,8 @@ class SummaryActivity : AppCompatActivity() {
         if (fragment == null) {
             fragment = when (menuItemId) {
                 R.id.summary_menu -> SummaryFragment()
-                // R.id.country_menu -> ActiveConferenceFragment()
-                //R.id.update_menu -> InfoFragment()
+                R.id.country_menu -> CountryInfoFragment()
+                R.id.update_menu -> SummaryFragment() // TODO Anuj
                 else -> return null
             }
             fragments.put(menuItemId, fragment)

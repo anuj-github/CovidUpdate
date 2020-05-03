@@ -22,7 +22,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class SummaryFragment:Fragment() {
 
     private lateinit var pieChart : PieChart
-    private lateinit var pieData : PieData
+    private val pieData : PieData = PieData()
     private lateinit var pieDataSet : PieDataSet
     private var pieEntries = mutableListOf<PieEntry>()
     private lateinit var binding : SummaryFragmentBinding
@@ -34,7 +34,6 @@ class SummaryFragment:Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = SummaryFragmentBinding.inflate(inflater)
-
         return binding.root
     }
 
@@ -50,25 +49,17 @@ class SummaryFragment:Fragment() {
     }
 
     private fun observeGlobalSummary() {
-        Log.d(TAG, "Anuj observeGlobalSummary")
+        Log.d(TAG, "observeGlobalSummary")
         summaryViewModel.getSummaryLiveData().observe(this.viewLifecycleOwner, Observer {
             Log.d(TAG, "on observeGlobalSummary data change")
             it?.let {
-                binding.apply {
                     updateEntries(it)
-                }
-
             }
         })
     }
 
-    private fun updateChart(summary: GlobalSummary){
-        binding.apply {
-            updateEntries(summary)
-        }
-    }
-
     private fun updateEntries(summary: GlobalSummary) {
+        Log.d(TAG, "update Entries")
         val death = summary.totalDeaths
         val recovered = summary.totalRecovered
         val active = summary.totalConfirmed - death - recovered
@@ -82,7 +73,10 @@ class SummaryFragment:Fragment() {
         pieEntries[2].label = getString(R.string.death)
 
         pieDataSet = PieDataSet(pieEntries, "")
-        pieData = PieData(pieDataSet)
+        pieData.clearValues()
+        pieData.addDataSet(pieDataSet)
+        pieData.dataSet = pieDataSet
+        pieData.notifyDataChanged()
         pieChart.data = pieData
         val arr = GlobalUtil.getColor()
         pieDataSet.setColors(arr[0], arr[1], arr[2])

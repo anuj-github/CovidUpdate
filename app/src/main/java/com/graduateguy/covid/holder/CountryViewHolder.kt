@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.graduateguy.covid.R
 import com.graduateguy.covid.room.entity.CountryInfo
 import com.graduateguy.covid.util.GlobalUtil
-import kotlinx.android.synthetic.main.summary_layout.view.*
+import kotlinx.android.synthetic.main.country_layout.view.*
 
 class CountryViewHolder private constructor( itemView: View): RecyclerView.ViewHolder(itemView) {
 
@@ -38,7 +38,7 @@ class CountryViewHolder private constructor( itemView: View): RecyclerView.ViewH
             return CountryViewHolder(
                 createView(
                     parent,
-                    R.layout.summary_layout
+                    R.layout.country_layout
                 )
             )
         }

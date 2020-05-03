@@ -11,7 +11,7 @@
         android:roundIcon="@drawable/covid"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.graduateguy.covid.ui.SummaryActivity">
+        <activity android:name="com.graduateguy.covid.ui.activity.SummaryActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.graduateguy.covid.ui.SummaryGraphActivity"/>
+        <activity android:name="com.graduateguy.covid.ui.activity.SummaryGraphActivity"/>
     </application>
 
 </manifest>
