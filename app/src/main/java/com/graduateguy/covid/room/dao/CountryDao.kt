@@ -21,6 +21,9 @@ interface CountryDao{
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(country: CountryInfo)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAll(countryList : List<CountryInfo>)
+
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun update(country: CountryInfo)
 
