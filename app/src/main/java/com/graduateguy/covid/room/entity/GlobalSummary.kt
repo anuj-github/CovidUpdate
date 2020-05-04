@@ -10,23 +10,23 @@ data class GlobalSummary(
     val id :Int,
 
     @field:Json(name = "NewConfirmed")
-    val newConfirmed: Int,
+    val newConfirmed: Int = 1,
 
     @field:Json(name = "NewDeaths")
-    val newDeaths: Int,
+    val newDeaths: Int = 1,
 
     @field:Json(name = "NewRecovered")
-    val newRecovered: Int,
+    val newRecovered: Int = 1,
 
     @field:Json(name = "TotalConfirmed")
-    val totalConfirmed: Int,
+    val totalConfirmed: Int = 3,
 
     @field:Json(name = "TotalDeaths")
-    val totalDeaths: Int,
+    val totalDeaths: Int = 1,
 
     @field:Json(name = "TotalRecovered")
-    val totalRecovered: Int,
+    val totalRecovered: Int = 1,
 
-    val date : String
+    val date : String = ""
 
 )
