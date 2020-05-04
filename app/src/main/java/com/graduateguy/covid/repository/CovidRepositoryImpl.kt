@@ -28,10 +28,6 @@ class CovidRepositoryImpl(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ICovidRepository, CoroutineScope {
 
-    init {
-        loadGlobalSummary()
-    }
-
     @WorkerThread
     override fun loadGlobalSummary() {
         launch {
@@ -44,9 +40,7 @@ class CovidRepositoryImpl(
                             db.globalSummaryDao.delete()
                             db.globalSummaryDao.insert(it.copy(date = this.date))
                         }
-                        countries.forEach {
-                           db.countrydao.insert(it)
-                        }
+                        db.countrydao.insertAll(countries)
                     }
                 } else {
                     Log.d(TAG, "Response has failed")

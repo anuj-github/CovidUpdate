@@ -8,6 +8,7 @@ import com.graduateguy.covid.repository.CovidRepositoryImpl
 import com.graduateguy.covid.repository.ICovidRepository
 import com.graduateguy.covid.room.CovidDatabase
 import com.graduateguy.covid.viewModel.SummaryViewModel
+import com.graduateguy.covid.worker.UpdateDataWorker
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.startKoin
@@ -17,11 +18,8 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 class CovidApplication: Application() {
 
-    private lateinit var application: CovidApplication
-
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
-        application = this
     }
 
     override fun onCreate() {
@@ -30,6 +28,12 @@ class CovidApplication: Application() {
             androidContext(this@CovidApplication)
             modules(applicationModule)
         }
+        init()
+    }
+
+    private fun init() {
+        //Initialize basic app start data
+        UpdateDataWorker.scheduleWork(this)
     }
 
     private val applicationModule = module {
@@ -54,7 +58,4 @@ class CovidApplication: Application() {
         viewModel { SummaryViewModel(get()) }
     }
 
-    fun getApplication(): CovidApplication {
-        return this
-    }
 }
