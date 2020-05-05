@@ -12,4 +12,6 @@
     <string name="most_affected">Most Affected Countries</string>
     <string name="country">Country</string>
     <string name="updates">Updates</string>
+    <string name="totalcase">Total case \n </string>
+    <string name="newcase">New case</string>
 </resources>
