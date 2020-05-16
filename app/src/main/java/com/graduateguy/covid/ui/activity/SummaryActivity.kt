@@ -50,7 +50,7 @@ class SummaryActivity : AppCompatActivity() {
         if (fragment != null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainer, fragment)
-                .addToBackStack(null)
+                // .addToBackStack(null)
                 .commit()
             return true
         }

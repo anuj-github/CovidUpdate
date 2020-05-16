@@ -15,7 +15,7 @@ interface CountryDao{
     @Query("SELECT * from CountryInfo where country=:country")
     fun getSummaryForCountry(country: String): Flow<CountryInfo>
 
-    @Query("SELECT * from CountryInfo ORDER BY totalConfirmed desc limit 10 ")
+    @Query("SELECT * from CountryInfo where totalConfirmed > 50000 ORDER BY totalConfirmed desc")
     fun getSummaryMostAffected(): Flow<List<CountryInfo>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
