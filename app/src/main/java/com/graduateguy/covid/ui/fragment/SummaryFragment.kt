@@ -78,6 +78,11 @@ class SummaryFragment:Fragment() {
         newsDeath.casecount.text = summary.newDeaths.toString()
         flexBoxLayout.addView(newsDeath.root)
 
+        val newsRecovered = CountCardBinding.inflate(inflater, flexBoxLayout, false)
+        newsRecovered.casemsg.text = getString(R.string.new_recovered)
+        newsRecovered.casecount.text = summary.newRecovered.toString()
+        flexBoxLayout.addView(newsRecovered.root)
+
     }
 
     private fun updateEntries(summary: GlobalSummary) {
@@ -105,7 +110,8 @@ class SummaryFragment:Fragment() {
         pieDataSet.sliceSpace = 1f
         pieDataSet.valueTextColor = Color.WHITE
         pieDataSet.valueTextSize = 10f
-        pieChart.setTouchEnabled(true)
+        pieChart.centerText = getString(R.string.covid_summary)
+        pieChart.invalidate()
 
     }
 

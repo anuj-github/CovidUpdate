@@ -4,13 +4,16 @@ import android.os.Bundle
 import android.util.SparseArray
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.graduateguy.covid.R
 import com.graduateguy.covid.databinding.SummaryGraphBinding
 import com.graduateguy.covid.ui.fragment.CountryInfoFragment
 import com.graduateguy.covid.ui.fragment.SummaryFragment
+import com.graduateguy.covid.viewModel.ResponseStatus
 import com.graduateguy.covid.viewModel.SummaryViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -26,6 +29,17 @@ class SummaryActivity : AppCompatActivity() {
         binding = SummaryGraphBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initNavigationMenu()
+
+        summaryViewModel.liveData.observe(this, Observer { response->
+            when(response){
+                is ResponseStatus.ResponseSuccess -> {
+                    Toast.makeText(this, "Updated successfully", Toast.LENGTH_SHORT).show()
+                }
+                is ResponseStatus.ResponseFailure -> {
+                    Toast.makeText(this, response.status, Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
     }
 
     private  fun initNavigationMenu(){
@@ -50,7 +64,7 @@ class SummaryActivity : AppCompatActivity() {
         if (fragment != null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainer, fragment)
-                // .addToBackStack(null)
+                .addToBackStack(null)
                 .commit()
             return true
         }
@@ -86,6 +100,7 @@ class SummaryActivity : AppCompatActivity() {
     }
 
     private fun refreshData(){
+        Toast.makeText(this, "Refreshing Data", Toast.LENGTH_SHORT).show()
         summaryViewModel.refreshData()
     }
 

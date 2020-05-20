@@ -47,9 +47,9 @@ class CountryInfoFragment:Fragment() {
     }
 
     private fun observeCountryData() {
-        Log.d(TAG, "observe Country Ino")
+        Log.d(TAG, "observe Country Info")
         summaryViewModel.getCountryLiveData().observe(this.viewLifecycleOwner, Observer {
-            Log.d(TAG, "on COntry info data change")
+            Log.d(TAG, "on Country info data change")
             it?.let {
                countryListAdapter.setData(it)
             }

@@ -15,4 +15,5 @@
     <string name="total_case">Total Case</string>
     <string name="new_case">New Case</string>
     <string name="new_death">New Death</string>
+    <string name="new_recovered">New Recovered</string>
 </resources>

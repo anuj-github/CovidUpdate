@@ -19,7 +19,7 @@ interface ICovidRepository {
 
     fun getSummaryData():Flow<GlobalSummary>
     fun getMostAffectedCountry():Flow<List<CountryInfo>>
-    fun loadGlobalSummary()
+    fun loadGlobalSummary(onSuccess: ()-> Unit = {}, onFailure:(String)->Unit = {})
 }
 
 class CovidRepositoryImpl(
@@ -29,7 +29,7 @@ class CovidRepositoryImpl(
 ) : ICovidRepository, CoroutineScope {
 
     @WorkerThread
-    override fun loadGlobalSummary() {
+    override fun loadGlobalSummary(onSuccess: ()-> Unit, onFailure:(String)->Unit) {
         launch {
             try {
                 val response = network.getCovidSummary().execute()
@@ -42,10 +42,13 @@ class CovidRepositoryImpl(
                         }
                         db.countrydao.insertAll(countries)
                     }
+                    onSuccess()
                 } else {
+                    onFailure("Api call failed to get response")
                     Log.d(TAG, "Response has failed")
                 }
             } catch (ex: Exception) {
+                onFailure(ex.localizedMessage)
                 Log.d(TAG, "Exception occured $ex")
             }
         }
@@ -58,7 +61,7 @@ class CovidRepositoryImpl(
         get() = SupervisorJob() + dispatcher
 
     companion object {
-        private const val TAG = "Covid19Repository"
+        private val TAG = CovidRepositoryImpl::class.java.simpleName
     }
 }
 
