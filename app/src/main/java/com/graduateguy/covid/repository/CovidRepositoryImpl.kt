@@ -48,7 +48,7 @@ class CovidRepositoryImpl(
                     Log.d(TAG, "Response has failed")
                 }
             } catch (ex: Exception) {
-                onFailure(ex.localizedMessage)
+                onFailure(ex.localizedMessage?:"Failed")
                 Log.d(TAG, "Exception occured $ex")
             }
         }

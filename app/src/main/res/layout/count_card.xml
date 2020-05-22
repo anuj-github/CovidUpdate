@@ -6,7 +6,6 @@
     android:layout_width="96dp"
     android:layout_height="48dp"
     android:layout_margin="4dp"
-    android:background="@android:color/white"
     android:orientation="vertical"
     app:cardCornerRadius="4dp"
     app:layout_constraintStart_toStartOf="parent"
