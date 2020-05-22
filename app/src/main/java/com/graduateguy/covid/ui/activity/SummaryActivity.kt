@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.graduateguy.covid.R
-import com.graduateguy.covid.databinding.SummaryGraphBinding
+import com.graduateguy.covid.databinding.SummaryActivityLayoutBinding
 import com.graduateguy.covid.ui.fragment.CountryInfoFragment
 import com.graduateguy.covid.ui.fragment.SummaryFragment
 import com.graduateguy.covid.viewModel.ResponseStatus
@@ -19,14 +19,14 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SummaryActivity : AppCompatActivity() {
 
-    private lateinit var binding : SummaryGraphBinding
+    private lateinit var binding : SummaryActivityLayoutBinding
     // Keep track of the fragments needed for Bottom Navigation View
     private val fragments = SparseArray<Fragment>()
     private val summaryViewModel : SummaryViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = SummaryGraphBinding.inflate(layoutInflater)
+        binding = SummaryActivityLayoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initNavigationMenu()
 
@@ -104,7 +104,9 @@ class SummaryActivity : AppCompatActivity() {
         summaryViewModel.refreshData()
     }
 
-
+    override fun onBackPressed() {
+        finish()
+    }
 
     companion object{
         private const val TAG = "LauncherActivity"

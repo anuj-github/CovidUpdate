@@ -14,7 +14,7 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.graduateguy.covid.R
 import com.graduateguy.covid.databinding.CountCardBinding
-import com.graduateguy.covid.databinding.SummaryFragmentBinding
+import com.graduateguy.covid.databinding.SummaryFragmentLayoutBinding
 import com.graduateguy.covid.room.entity.GlobalSummary
 import com.graduateguy.covid.util.GlobalUtil
 import com.graduateguy.covid.viewModel.SummaryViewModel
@@ -26,7 +26,7 @@ class SummaryFragment:Fragment() {
     private val pieData : PieData = PieData()
     private lateinit var pieDataSet : PieDataSet
     private var pieEntries = mutableListOf<PieEntry>()
-    private lateinit var binding : SummaryFragmentBinding
+    private lateinit var binding : SummaryFragmentLayoutBinding
     private val summaryViewModel : SummaryViewModel by viewModel()
 
     override fun onCreateView(
@@ -34,7 +34,7 @@ class SummaryFragment:Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = SummaryFragmentBinding.inflate(inflater)
+        binding = SummaryFragmentLayoutBinding.inflate(inflater)
         return binding.root
     }
 

@@ -5,13 +5,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.graduateguy.covid.R
-import com.graduateguy.covid.databinding.CountryLayoutBinding
+import com.graduateguy.covid.databinding.CountryViewLayoutBinding
 import com.graduateguy.covid.room.entity.CountryInfo
 import com.graduateguy.covid.util.GlobalUtil
-import java.util.logging.Logger
 
 class CountryViewHolder private constructor(
-    private val binding: CountryLayoutBinding
+    private val binding: CountryViewLayoutBinding
 ):
     RecyclerView.ViewHolder(binding.root) {
 
@@ -39,7 +38,7 @@ class CountryViewHolder private constructor(
         private val TAG = CountryViewHolder::class.java.simpleName
 
         fun instantiate(parent: ViewGroup): CountryViewHolder {
-            val binding = CountryLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            val binding = CountryViewLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             return CountryViewHolder(binding)
         }
     }

@@ -10,8 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.graduateguy.covid.adapter.CountryListAdapter
-import com.graduateguy.covid.databinding.CountryLayoutBinding
-import com.graduateguy.covid.databinding.CountryListLayoutBinding
+import com.graduateguy.covid.databinding.CountryFragmentLayoutBinding
 import com.graduateguy.covid.viewModel.SummaryViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -19,7 +18,7 @@ class CountryInfoFragment:Fragment() {
 
     private lateinit var countryListAdapter: CountryListAdapter
     private lateinit var recyclerView : RecyclerView
-    private lateinit var binding : CountryListLayoutBinding
+    private lateinit var binding : CountryFragmentLayoutBinding
     private val summaryViewModel : SummaryViewModel by viewModel()
 
     override fun onCreateView(
@@ -27,7 +26,7 @@ class CountryInfoFragment:Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = CountryListLayoutBinding.inflate(inflater)
+        binding = CountryFragmentLayoutBinding.inflate(inflater)
         return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
