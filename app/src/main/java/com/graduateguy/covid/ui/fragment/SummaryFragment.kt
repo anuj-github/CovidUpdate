@@ -18,7 +18,7 @@ import com.graduateguy.covid.databinding.SummaryFragmentLayoutBinding
 import com.graduateguy.covid.room.entity.GlobalSummary
 import com.graduateguy.covid.util.GlobalUtil
 import com.graduateguy.covid.viewModel.SummaryViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class SummaryFragment:Fragment() {
 
@@ -27,7 +27,7 @@ class SummaryFragment:Fragment() {
     private lateinit var pieDataSet : PieDataSet
     private var pieEntries = mutableListOf<PieEntry>()
     private lateinit var binding : SummaryFragmentLayoutBinding
-    private val summaryViewModel : SummaryViewModel by viewModel()
+    private val summaryViewModel : SummaryViewModel by  sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,7 +49,7 @@ class SummaryFragment:Fragment() {
     }
 
     private fun observeGlobalSummary() {
-        Log.d(TAG, "observeGlobalSummary")
+        Log.d(TAG, "observe GlobalSummary $summaryViewModel")
         summaryViewModel.getSummaryLiveData().observe(this.viewLifecycleOwner, Observer {
             Log.d(TAG, "on observeGlobalSummary data change")
             it?.let {
@@ -116,6 +116,6 @@ class SummaryFragment:Fragment() {
     }
 
     companion object{
-        private const val TAG = "SummaryFragment"
+        private val TAG = SummaryFragment::class.java.simpleName
     }
 }
