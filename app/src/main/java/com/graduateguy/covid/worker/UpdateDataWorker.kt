@@ -10,13 +10,14 @@ import androidx.work.WorkManager
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.graduateguy.covid.repository.ICovidRepository
+import java.util.concurrent.TimeUnit
 import org.koin.core.KoinComponent
 import org.koin.core.inject
-import java.util.concurrent.TimeUnit
 
 class UpdateDataWorker(
     context: Context,
-    workerParameters: WorkerParameters): Worker(context, workerParameters), KoinComponent {
+    workerParameters: WorkerParameters
+) : Worker(context, workerParameters), KoinComponent {
     override fun doWork(): Result {
         Log.d(TAG, "Work Started")
         val repository: ICovidRepository by inject()
@@ -25,7 +26,7 @@ class UpdateDataWorker(
         return Result.success()
     }
 
-    companion object{
+    companion object {
         private const val WORK_NAME = "UpdateDataWorker"
         private const val TAG = "UpdateDataWorker"
 
@@ -48,5 +49,4 @@ class UpdateDataWorker(
             )
         }
     }
-
 }

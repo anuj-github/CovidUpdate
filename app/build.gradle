@@ -44,6 +44,10 @@ android {
     }
 }
 
+configurations {
+    ktlint
+}
+
 dependencies {
     def room_version = "2.2.5"
     def retrofit = "2.8.1"
@@ -87,4 +91,22 @@ dependencies {
     // Work manager
     implementation "androidx.work:work-runtime-ktx:$work_version"
     implementation "com.google.android:flexbox:$flex_box_layout"
+
+    ktlint "com.pinterest:ktlint:0.36.0"
+}
+
+task ktlint(type: JavaExec, group: "verification") {
+    description = "Check Kotlin code style."
+    main = "com.pinterest.ktlint.Main"
+    classpath = configurations.ktlint
+    args "src/**/*.kt"
+}
+
+check.dependsOn ktlint
+
+task ktlintFormat(type: JavaExec, group: "formatting") {
+    description = "Fix Kotlin code style deviations."
+    main = "com.pinterest.ktlint.Main"
+    classpath = configurations.ktlint
+    args "-F", "src/**/*.kt"
 }

@@ -7,7 +7,7 @@ import com.squareup.moshi.Json
 @Entity
 data class GlobalSummary(
     @PrimaryKey(autoGenerate = true)
-    val id :Int,
+    val id: Int,
 
     @field:Json(name = "NewConfirmed")
     val newConfirmed: Int = 1,
@@ -27,6 +27,6 @@ data class GlobalSummary(
     @field:Json(name = "TotalRecovered")
     val totalRecovered: Int = 1,
 
-    val date : String = ""
+    val date: String = ""
 
 )

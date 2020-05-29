@@ -11,7 +11,7 @@ import com.graduateguy.covid.util.GlobalUtil
 
 class CountryViewHolder private constructor(
     private val binding: CountryViewLayoutBinding
-):
+) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun setData(countryInfo: CountryInfo) {
@@ -34,7 +34,7 @@ class CountryViewHolder private constructor(
         )
     }
 
-    companion object{
+    companion object {
         private val TAG = CountryViewHolder::class.java.simpleName
 
         fun instantiate(parent: ViewGroup): CountryViewHolder {

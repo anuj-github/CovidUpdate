@@ -10,7 +10,7 @@ import com.graduateguy.covid.room.entity.CountryInfo
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface CountryDao{
+interface CountryDao {
 
     @Query("SELECT * from CountryInfo where country=:country")
     fun getSummaryForCountry(country: String): Flow<CountryInfo>
@@ -22,7 +22,7 @@ interface CountryDao{
     fun insert(country: CountryInfo)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(countryList : List<CountryInfo>)
+    fun insertAll(countryList: List<CountryInfo>)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun update(country: CountryInfo)

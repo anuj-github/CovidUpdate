@@ -4,11 +4,8 @@ import android.os.Bundle
 import android.util.SparseArray
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isGone
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -22,10 +19,10 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SummaryActivity : AppCompatActivity() {
 
-    private lateinit var binding : SummaryActivityLayoutBinding
+    private lateinit var binding: SummaryActivityLayoutBinding
     // Keep track of the fragments needed for Bottom Navigation View
     private val fragments = SparseArray<Fragment>()
-    private val summaryViewModel : SummaryViewModel by viewModel()
+    private val summaryViewModel: SummaryViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,8 +30,8 @@ class SummaryActivity : AppCompatActivity() {
         setContentView(binding.root)
         initNavigationMenu()
 
-        summaryViewModel.liveData.observe(this, Observer { response->
-            when(response){
+        summaryViewModel.liveData.observe(this, Observer { response ->
+            when (response) {
                 is ResponseStatus.ResponseSuccess -> {
                     Toast.makeText(this, "Updated successfully", Toast.LENGTH_SHORT).show()
                 }
@@ -45,16 +42,16 @@ class SummaryActivity : AppCompatActivity() {
         })
     }
 
-    private  fun initNavigationMenu(){
+    private fun initNavigationMenu() {
         binding.navigationMenu.apply {
             setOnNavigationItemSelectedListener(navigationMenuListener)
             selectedItemId = R.id.summary_menu
         }
     }
-    private val navigationMenuListener = BottomNavigationView.OnNavigationItemSelectedListener{
-        item->
-        when(val id = item.itemId){
-            R.id.summary_menu, R.id.country_menu, R.id.update_menu ->{
+    private val navigationMenuListener = BottomNavigationView.OnNavigationItemSelectedListener {
+        item ->
+        when (val id = item.itemId) {
+            R.id.summary_menu, R.id.country_menu, R.id.update_menu -> {
                 return@OnNavigationItemSelectedListener openFragment(id)
             }
 
@@ -88,21 +85,19 @@ class SummaryActivity : AppCompatActivity() {
         return fragment
     }
 
-
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.summary_menu, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
             R.id.refresh -> refreshData()
         }
         return super.onOptionsItemSelected(item)
     }
 
-    private fun refreshData(){
+    private fun refreshData() {
         Toast.makeText(this, "Refreshing Data", Toast.LENGTH_SHORT).show()
         summaryViewModel.refreshData()
     }
@@ -111,7 +106,7 @@ class SummaryActivity : AppCompatActivity() {
         finish()
     }
 
-    companion object{
+    companion object {
         private val TAG = SummaryActivity::class.java.simpleName
     }
 }
