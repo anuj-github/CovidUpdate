@@ -16,7 +16,7 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-class CovidApplication: Application() {
+class CovidApplication : Application() {
 
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
@@ -32,7 +32,7 @@ class CovidApplication: Application() {
     }
 
     private fun init() {
-        //Initialize basic app start data
+        // Initialize basic app start data
         UpdateDataWorker.scheduleWork(this)
     }
 
@@ -51,11 +51,10 @@ class CovidApplication: Application() {
                 .addConverterFactory(MoshiConverterFactory.create())
                 .build().create(Covid19Api::class.java)
         }
-        single<ICovidRepository>{
+        single<ICovidRepository> {
             CovidRepositoryImpl(get(), get())
         }
 
         viewModel { SummaryViewModel(get()) }
     }
-
 }

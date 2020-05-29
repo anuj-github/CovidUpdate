@@ -9,7 +9,7 @@ import com.graduateguy.covid.repository.ICovidRepository
 import com.graduateguy.covid.room.entity.CountryInfo
 import com.graduateguy.covid.room.entity.GlobalSummary
 
-class SummaryViewModel(private val repository: ICovidRepository):ViewModel() {
+class SummaryViewModel(private val repository: ICovidRepository) : ViewModel() {
 
     private val _liveData = MutableLiveData<ResponseStatus>()
     val liveData: LiveData<ResponseStatus> = _liveData

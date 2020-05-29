@@ -20,14 +20,14 @@ import com.graduateguy.covid.util.GlobalUtil
 import com.graduateguy.covid.viewModel.SummaryViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class SummaryFragment:Fragment() {
+class SummaryFragment : Fragment() {
 
-    private lateinit var pieChart : PieChart
-    private val pieData : PieData = PieData()
-    private lateinit var pieDataSet : PieDataSet
+    private lateinit var pieChart: PieChart
+    private val pieData: PieData = PieData()
+    private lateinit var pieDataSet: PieDataSet
     private var pieEntries = mutableListOf<PieEntry>()
-    private lateinit var binding : SummaryFragmentLayoutBinding
-    private val summaryViewModel : SummaryViewModel by  sharedViewModel()
+    private lateinit var binding: SummaryFragmentLayoutBinding
+    private val summaryViewModel: SummaryViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -82,7 +82,6 @@ class SummaryFragment:Fragment() {
         newsRecovered.casemsg.text = getString(R.string.new_recovered)
         newsRecovered.casecount.text = summary.newRecovered.toString()
         flexBoxLayout.addView(newsRecovered.root)
-
     }
 
     private fun updateEntries(summary: GlobalSummary) {
@@ -112,10 +111,9 @@ class SummaryFragment:Fragment() {
         pieDataSet.valueTextSize = 10f
         pieChart.centerText = getString(R.string.covid_summary)
         pieChart.invalidate()
-
     }
 
-    companion object{
+    companion object {
         private val TAG = SummaryFragment::class.java.simpleName
     }
 }

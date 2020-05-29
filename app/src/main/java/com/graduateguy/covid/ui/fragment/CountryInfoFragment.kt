@@ -14,12 +14,12 @@ import com.graduateguy.covid.databinding.CountryFragmentLayoutBinding
 import com.graduateguy.covid.viewModel.SummaryViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class CountryInfoFragment:Fragment() {
+class CountryInfoFragment : Fragment() {
 
     private lateinit var countryListAdapter: CountryListAdapter
-    private lateinit var recyclerView : RecyclerView
-    private lateinit var binding : CountryFragmentLayoutBinding
-    private val summaryViewModel : SummaryViewModel by sharedViewModel()
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var binding: CountryFragmentLayoutBinding
+    private val summaryViewModel: SummaryViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,7 +41,6 @@ class CountryInfoFragment:Fragment() {
             layoutManager = LinearLayoutManager(activity)
             adapter = countryListAdapter
         }
-
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -54,7 +53,7 @@ class CountryInfoFragment:Fragment() {
         summaryViewModel.getCountryLiveData().observe(this.viewLifecycleOwner, Observer {
             Log.d(TAG, "on Country info data change")
             it?.let {
-               countryListAdapter.setData(it)
+                countryListAdapter.setData(it)
             }
         })
     }

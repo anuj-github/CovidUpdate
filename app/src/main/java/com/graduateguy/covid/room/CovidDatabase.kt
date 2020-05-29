@@ -20,9 +20,9 @@ abstract class CovidDatabase : RoomDatabase() {
     abstract val globalSummaryDao: GlobalSummaryDao
     abstract val countrydao: CountryDao
 
-    companion object{
+    companion object {
 
-        private var covidDatabse:CovidDatabase?=null
+        private var covidDatabse: CovidDatabase? = null
         val DB_NAME = "coviddb"
         fun getCovidDatabase(context: Context): CovidDatabase {
             if (covidDatabse == null) {
