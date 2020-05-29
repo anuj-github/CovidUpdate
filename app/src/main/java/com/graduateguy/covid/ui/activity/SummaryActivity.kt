@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.util.SparseArray
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -109,6 +112,6 @@ class SummaryActivity : AppCompatActivity() {
     }
 
     companion object{
-        private const val TAG = "LauncherActivity"
+        private val TAG = SummaryActivity::class.java.simpleName
     }
 }

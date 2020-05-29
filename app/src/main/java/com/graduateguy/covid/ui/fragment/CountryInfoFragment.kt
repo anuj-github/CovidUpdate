@@ -12,14 +12,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.graduateguy.covid.adapter.CountryListAdapter
 import com.graduateguy.covid.databinding.CountryFragmentLayoutBinding
 import com.graduateguy.covid.viewModel.SummaryViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class CountryInfoFragment:Fragment() {
 
     private lateinit var countryListAdapter: CountryListAdapter
     private lateinit var recyclerView : RecyclerView
     private lateinit var binding : CountryFragmentLayoutBinding
-    private val summaryViewModel : SummaryViewModel by viewModel()
+    private val summaryViewModel : SummaryViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,7 +33,6 @@ class CountryInfoFragment:Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initAdapter()
-        observeCountryData()
     }
     private fun initAdapter() {
         recyclerView = binding.recyclerView
@@ -45,8 +44,13 @@ class CountryInfoFragment:Fragment() {
 
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        observeCountryData()
+    }
+
     private fun observeCountryData() {
-        Log.d(TAG, "observe Country Info")
+        Log.d(TAG, "observe Country Info $summaryViewModel")
         summaryViewModel.getCountryLiveData().observe(this.viewLifecycleOwner, Observer {
             Log.d(TAG, "on Country info data change")
             it?.let {
@@ -56,6 +60,6 @@ class CountryInfoFragment:Fragment() {
     }
 
     companion object {
-        private const val TAG = ""
+        private val TAG = CountryInfoFragment::class.java.simpleName
     }
 }
