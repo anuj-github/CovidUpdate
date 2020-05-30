@@ -1,6 +1,6 @@
 package com.graduateguy.covid.search.repo
 
-import com.graduateguy.covid.room.CovidDatabase
+import com.graduateguy.covid.room.dao.CountryDao
 import com.graduateguy.covid.room.entity.CountryInfo
 import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.CoroutineDispatcher
@@ -15,12 +15,12 @@ interface ISearchRepository {
 }
 
 class SearchRepositoryImpl(
-    private val db: CovidDatabase,
+    private val dao: CountryDao,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ISearchRepository, CoroutineScope {
 
     override fun getCountry(searchKey: String): Flow<List<CountryInfo>> {
-        return db.countrydao.getAllCountry()
+        return dao.getAllCountry()
     }
 
     override val coroutineContext: CoroutineContext

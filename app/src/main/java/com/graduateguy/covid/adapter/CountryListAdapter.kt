@@ -4,7 +4,6 @@ import android.util.Log
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.graduateguy.covid.holder.CountryViewHolder
 import com.graduateguy.covid.room.entity.CountryInfo
@@ -37,7 +36,7 @@ class CountryListAdapter : RecyclerView.Adapter<CountryViewHolder>(), Filterable
                 Log.d(TAG, "Search Query $constraint")
                 if (constraint.isNullOrEmpty()) countryInfoFiltered = countryInfoList
                 countryInfoFiltered = countryInfoList.filter { countryInfo ->
-                    countryInfo.country.contains(constraint?:"", true)
+                    countryInfo.country.contains(constraint ?: "", true)
                 } as ArrayList<CountryInfo>
 
                 val filteredResult = FilterResults()
