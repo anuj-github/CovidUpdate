@@ -1,6 +1,8 @@
 package com.graduateguy.covid.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.util.SparseArray
 import android.view.Menu
 import android.view.MenuItem
@@ -11,8 +13,10 @@ import androidx.lifecycle.Observer
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.graduateguy.covid.R
 import com.graduateguy.covid.databinding.SummaryActivityLayoutBinding
+import com.graduateguy.covid.search.ui.SearchActivity
 import com.graduateguy.covid.ui.fragment.CountryInfoFragment
 import com.graduateguy.covid.ui.fragment.SummaryFragment
+import com.graduateguy.covid.ui.fragment.UpdateFragment
 import com.graduateguy.covid.viewModel.ResponseStatus
 import com.graduateguy.covid.viewModel.SummaryViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -77,7 +81,7 @@ class SummaryActivity : AppCompatActivity() {
             fragment = when (menuItemId) {
                 R.id.summary_menu -> SummaryFragment()
                 R.id.country_menu -> CountryInfoFragment()
-                R.id.update_menu -> SummaryFragment() // TODO Anuj
+                R.id.update_menu -> UpdateFragment()
                 else -> return null
             }
             fragments.put(menuItemId, fragment)
@@ -91,8 +95,10 @@ class SummaryActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        Log.i(TAG, "On Menu clicked id ${item.itemId}")
         when (item.itemId) {
             R.id.refresh -> refreshData()
+            R.id.search -> startActivity(Intent(this, SearchActivity::class.java))
         }
         return super.onOptionsItemSelected(item)
     }

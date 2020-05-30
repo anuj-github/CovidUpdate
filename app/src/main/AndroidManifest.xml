@@ -19,6 +19,10 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".search.ui.SearchActivity"
+            android:theme="@style/SearchTheme"
+            android:windowSoftInputMode="stateVisible|adjustResize">
+        </activity>
     </application>
 
 </manifest>

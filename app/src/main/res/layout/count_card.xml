@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cardView"
-    android:layout_width="96dp"
+    android:layout_width="wrap_content"
     android:layout_height="48dp"
     android:layout_margin="4dp"
     android:orientation="vertical"
@@ -15,25 +15,22 @@
         android:id="@+id/casemsg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:gravity="center_horizontal"
-        android:padding="2dp"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="2dp"
         android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
         android:text="Total Confirmed"
         android:textColor="@android:color/black"
-        android:textStyle="bold"
-        android:textSize="12sp" />
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/casecount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_margin="2dp"
         android:maxLines="1"
-        android:padding="2dp"
-        android:gravity="center_horizontal"
-        android:layout_marginStart="4dp"
         android:text="1234567890 "
         android:textColor="@android:color/black"
-        android:textSize="12sp" />
+        android:textSize="14sp" />
 </androidx.cardview.widget.CardView>

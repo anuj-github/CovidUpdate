@@ -13,6 +13,7 @@ class SummaryViewModel(private val repository: ICovidRepository) : ViewModel() {
 
     private val _liveData = MutableLiveData<ResponseStatus>()
     val liveData: LiveData<ResponseStatus> = _liveData
+
     fun refreshData() {
         repository.loadGlobalSummary({
             _liveData.postValue(ResponseStatus.ResponseSuccess())
@@ -29,7 +30,7 @@ class SummaryViewModel(private val repository: ICovidRepository) : ViewModel() {
 
     fun getCountryLiveData(): LiveData<List<CountryInfo>> {
         return repository
-            .getMostAffectedCountry()
+            .getAllCountryInfo()
             .asLiveData(viewModelScope.coroutineContext)
     }
 }

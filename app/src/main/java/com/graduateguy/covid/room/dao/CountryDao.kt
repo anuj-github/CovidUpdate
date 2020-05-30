@@ -16,7 +16,10 @@ interface CountryDao {
     fun getSummaryForCountry(country: String): Flow<CountryInfo>
 
     @Query("SELECT * from CountryInfo ORDER BY totalConfirmed desc")
-    fun getSummaryMostAffected(): Flow<List<CountryInfo>>
+    fun getAllCountry(): Flow<List<CountryInfo>>
+
+    @Query("SELECT * from CountryInfo where country like :searchKey")
+    fun getCountry(searchKey: String): Flow<List<CountryInfo>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(country: CountryInfo)

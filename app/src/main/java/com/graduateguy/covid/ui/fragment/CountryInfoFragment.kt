@@ -29,11 +29,13 @@ class CountryInfoFragment : Fragment() {
         binding = CountryFragmentLayoutBinding.inflate(inflater)
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initAdapter()
     }
+
     private fun initAdapter() {
         recyclerView = binding.recyclerView
         countryListAdapter = CountryListAdapter()
