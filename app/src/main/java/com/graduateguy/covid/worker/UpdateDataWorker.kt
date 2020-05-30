@@ -38,7 +38,7 @@ class UpdateDataWorker(
                 .build()
             val periodicWorkRequest =
                 PeriodicWorkRequest.Builder(
-                    UpdateDataWorker::class.java, 1, TimeUnit.HOURS)
+                    UpdateDataWorker::class.java, 1, TimeUnit.DAYS)
                     .setConstraints(constraints)
                     .addTag(TAG)
                     .build()
