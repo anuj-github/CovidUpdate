@@ -58,7 +58,7 @@ class CovidApplication : Application() {
             CovidRepositoryImpl(get(), get())
         }
 
-        single<ISearchRepository> {SearchRepositoryImpl(get())  }
+        single<ISearchRepository> { SearchRepositoryImpl(get()) }
 
         viewModel { SummaryViewModel(get()) }
         viewModel { SearchViewModel(get()) }

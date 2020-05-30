@@ -1,13 +1,11 @@
 package com.graduateguy.covid.ui.activity
 
-import android.app.SearchManager
-import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.util.SparseArray
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -15,6 +13,7 @@ import androidx.lifecycle.Observer
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.graduateguy.covid.R
 import com.graduateguy.covid.databinding.SummaryActivityLayoutBinding
+import com.graduateguy.covid.search.ui.SearchActivity
 import com.graduateguy.covid.ui.fragment.CountryInfoFragment
 import com.graduateguy.covid.ui.fragment.SummaryFragment
 import com.graduateguy.covid.ui.fragment.UpdateFragment
@@ -92,11 +91,6 @@ class SummaryActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.summary_menu, menu)
-        // Associate searchable configuration with the SearchView
-        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        (menu?.findItem(R.id.search)?.actionView as SearchView).apply {
-            setSearchableInfo(searchManager.getSearchableInfo(componentName))
-        }
         return true
     }
 
@@ -104,6 +98,7 @@ class SummaryActivity : AppCompatActivity() {
         Log.i(TAG, "On Menu clicked id ${item.itemId}")
         when (item.itemId) {
             R.id.refresh -> refreshData()
+            R.id.search -> startActivity(Intent(this, SearchActivity::class.java))
         }
         return super.onOptionsItemSelected(item)
     }

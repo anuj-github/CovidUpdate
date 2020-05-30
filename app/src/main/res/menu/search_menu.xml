@@ -7,12 +7,6 @@
        android:icon="@drawable/ic_search"
        android:id="@+id/search"
        app:showAsAction="always"
-       />
-
-   <item
-       android:title="@string/refresh"
-       android:icon="@drawable/refresh_icon_pressed"
-       android:id="@+id/refresh"
-       app:showAsAction="always"
+       app:actionViewClass="android.widget.SearchView"
        />
 </menu>
