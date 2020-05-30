@@ -1,7 +1,6 @@
 package com.graduateguy.covid.repository
 
 import android.util.Log
-import androidx.annotation.WorkerThread
 import com.graduateguy.covid.network.api.Covid19Api
 import com.graduateguy.covid.room.CovidDatabase
 import com.graduateguy.covid.room.entity.CountryInfo
@@ -18,7 +17,7 @@ import kotlinx.coroutines.launch
 interface ICovidRepository {
 
     fun getSummaryData(): Flow<GlobalSummary>
-    fun getMostAffectedCountry(): Flow<List<CountryInfo>>
+    fun getAllCountryInfo(): Flow<List<CountryInfo>>
     fun loadGlobalSummary(onSuccess: () -> Unit = {}, onFailure: (String) -> Unit = {})
 }
 
@@ -28,7 +27,6 @@ class CovidRepositoryImpl(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ICovidRepository, CoroutineScope {
 
-    @WorkerThread
     override fun loadGlobalSummary(onSuccess: () -> Unit, onFailure: (String) -> Unit) {
         launch {
             try {
@@ -55,7 +53,7 @@ class CovidRepositoryImpl(
     }
 
     override fun getSummaryData(): Flow<GlobalSummary> = db.globalSummaryDao.getSummary()
-    override fun getMostAffectedCountry(): Flow<List<CountryInfo>> = db.countrydao.getSummaryMostAffected()
+    override fun getAllCountryInfo(): Flow<List<CountryInfo>> = db.countrydao.getAllCountry()
 
     override val coroutineContext: CoroutineContext
         get() = SupervisorJob() + dispatcher

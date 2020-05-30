@@ -7,6 +7,9 @@ import com.graduateguy.covid.network.api.Covid19Api
 import com.graduateguy.covid.repository.CovidRepositoryImpl
 import com.graduateguy.covid.repository.ICovidRepository
 import com.graduateguy.covid.room.CovidDatabase
+import com.graduateguy.covid.search.repo.ISearchRepository
+import com.graduateguy.covid.search.repo.SearchRepositoryImpl
+import com.graduateguy.covid.search.viewmodel.SearchViewModel
 import com.graduateguy.covid.viewModel.SummaryViewModel
 import com.graduateguy.covid.worker.UpdateDataWorker
 import org.koin.android.ext.koin.androidContext
@@ -55,6 +58,9 @@ class CovidApplication : Application() {
             CovidRepositoryImpl(get(), get())
         }
 
+        single<ISearchRepository> {SearchRepositoryImpl(get())  }
+
         viewModel { SummaryViewModel(get()) }
+        viewModel { SearchViewModel(get()) }
     }
 }

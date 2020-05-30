@@ -2,9 +2,8 @@ package com.graduateguy.covid.ui.fragment
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,11 +28,13 @@ class CountryInfoFragment : Fragment() {
         binding = CountryFragmentLayoutBinding.inflate(inflater)
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initAdapter()
     }
+
     private fun initAdapter() {
         recyclerView = binding.recyclerView
         countryListAdapter = CountryListAdapter()

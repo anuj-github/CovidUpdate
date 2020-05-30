@@ -1,9 +1,13 @@
 package com.graduateguy.covid.ui.activity
 
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.util.SparseArray
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -13,6 +17,7 @@ import com.graduateguy.covid.R
 import com.graduateguy.covid.databinding.SummaryActivityLayoutBinding
 import com.graduateguy.covid.ui.fragment.CountryInfoFragment
 import com.graduateguy.covid.ui.fragment.SummaryFragment
+import com.graduateguy.covid.ui.fragment.UpdateFragment
 import com.graduateguy.covid.viewModel.ResponseStatus
 import com.graduateguy.covid.viewModel.SummaryViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -77,7 +82,7 @@ class SummaryActivity : AppCompatActivity() {
             fragment = when (menuItemId) {
                 R.id.summary_menu -> SummaryFragment()
                 R.id.country_menu -> CountryInfoFragment()
-                R.id.update_menu -> SummaryFragment() // TODO Anuj
+                R.id.update_menu -> UpdateFragment()
                 else -> return null
             }
             fragments.put(menuItemId, fragment)
@@ -87,10 +92,16 @@ class SummaryActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.summary_menu, menu)
+        // Associate searchable configuration with the SearchView
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        (menu?.findItem(R.id.search)?.actionView as SearchView).apply {
+            setSearchableInfo(searchManager.getSearchableInfo(componentName))
+        }
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        Log.i(TAG, "On Menu clicked id ${item.itemId}")
         when (item.itemId) {
             R.id.refresh -> refreshData()
         }
