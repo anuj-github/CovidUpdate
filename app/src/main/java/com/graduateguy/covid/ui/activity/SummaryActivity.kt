@@ -8,11 +8,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.ui.core.setContent
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.graduateguy.covid.R
 import com.graduateguy.covid.databinding.SummaryActivityLayoutBinding
 import com.graduateguy.covid.ui.fragment.CountryInfoFragment
 import com.graduateguy.covid.ui.fragment.SummaryFragment
+import com.graduateguy.covid.ui.fragment.UpdatesFragment
 import com.graduateguy.covid.viewModel.ResponseStatus
 import com.graduateguy.covid.viewModel.SummaryViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -29,6 +31,7 @@ class SummaryActivity : AppCompatActivity() {
         binding = SummaryActivityLayoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initNavigationMenu()
+        setContent {  }
 
         summaryViewModel.liveData.observe(this, Observer { response ->
             when (response) {
@@ -77,7 +80,7 @@ class SummaryActivity : AppCompatActivity() {
             fragment = when (menuItemId) {
                 R.id.summary_menu -> SummaryFragment()
                 R.id.country_menu -> CountryInfoFragment()
-                R.id.update_menu -> SummaryFragment() // TODO Anuj
+                R.id.update_menu -> UpdatesFragment()
                 else -> return null
             }
             fragments.put(menuItemId, fragment)
