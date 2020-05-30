@@ -11,7 +11,7 @@
 
    <item
        android:title="@string/refresh"
-       android:icon="@drawable/refresh_icon_pressed"
+       android:icon="@drawable/refresh_icon"
        android:id="@+id/refresh"
        app:showAsAction="always"
        />
