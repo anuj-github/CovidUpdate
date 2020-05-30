@@ -27,7 +27,6 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Toast.makeText(this, "Show", Toast.LENGTH_LONG).show()
         binding = SearchLayoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initAdapter()
@@ -41,7 +40,6 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
             layoutManager = LinearLayoutManager(this@SearchActivity)
             adapter = countryListAdapter
         }
-        Log.i(TAG, "Init adaper")
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -63,9 +61,8 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     }
 
     private fun loadAllData() {
-        Log.d(TAG, "search")
+        Log.d(TAG, "load All Data")
         searchViewModel.searchCountry().observe(this, Observer {
-            Log.d(TAG, "Received result $it")
             countryListAdapter.setData(it)
         })
     }
