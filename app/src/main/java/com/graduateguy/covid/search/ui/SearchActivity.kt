@@ -43,7 +43,6 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the options menu from XML
         val inflater = menuInflater
         inflater.inflate(R.menu.search_menu, menu)
 
@@ -69,11 +68,12 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         Log.i(TAG, "Text changed")
-        countryListAdapter.filter.filter(query ?: "")
+        countryListAdapter.filter.filter(query)
         return true
     }
 
-    override fun onQueryTextChange(newText: String?): Boolean {
+    override fun onQueryTextChange(query: String?): Boolean {
+        countryListAdapter.filter.filter(query)
         return true
     }
 
