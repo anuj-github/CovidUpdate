@@ -56,6 +56,7 @@ dependencies {
     def koin_version = '2.1.5'
     def work_version = "2.3.4"
     def flex_box_layout = "2.0.1"
+    def material = "1.2.0-beta01"
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -91,6 +92,8 @@ dependencies {
     // Work manager
     implementation "androidx.work:work-runtime-ktx:$work_version"
     implementation "com.google.android:flexbox:$flex_box_layout"
+
+    implementation "com.google.android.material:material:$material"
 
     ktlint "com.pinterest:ktlint:0.36.0"
 }
