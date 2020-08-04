@@ -13,12 +13,13 @@ class SummaryViewModel(private val repository: ICovidRepository) : ViewModel() {
 
     private val _liveData = MutableLiveData<ResponseStatus>()
     val liveData: LiveData<ResponseStatus> = _liveData
+    val testData: LiveData<Int> = MutableLiveData(1)
 
     fun refreshData() {
         repository.loadGlobalSummary({
-            _liveData.postValue(ResponseStatus.ResponseSuccess())
+            _liveData.postValue(ResponseStatus.Success())
         }, {
-            _liveData.postValue(ResponseStatus.ResponseFailure(it))
+            _liveData.postValue(ResponseStatus.Failure(it))
         })
     }
 
@@ -36,6 +37,6 @@ class SummaryViewModel(private val repository: ICovidRepository) : ViewModel() {
 }
 
 sealed class ResponseStatus(open val status: String) {
-    class ResponseSuccess() : ResponseStatus("")
-    class ResponseFailure(override val status: String) : ResponseStatus(status)
+    class Success() : ResponseStatus("")
+    class Failure(override val status: String) : ResponseStatus(status)
 }

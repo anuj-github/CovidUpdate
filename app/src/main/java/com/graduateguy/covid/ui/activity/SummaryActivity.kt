@@ -36,10 +36,10 @@ class SummaryActivity : AppCompatActivity() {
 
         summaryViewModel.liveData.observe(this, Observer { response ->
             when (response) {
-                is ResponseStatus.ResponseSuccess -> {
+                is ResponseStatus.Success -> {
                     Toast.makeText(this, "Updated successfully", Toast.LENGTH_SHORT).show()
                 }
-                is ResponseStatus.ResponseFailure -> {
+                is ResponseStatus.Failure -> {
                     Toast.makeText(this, response.status, Toast.LENGTH_SHORT).show()
                 }
             }
